@@ -12,14 +12,15 @@ action_chains = ActionChains(driver)
 action_chains.move_to_element_with_offset(table, 88,88).click().perform()
 
 driver.switch_to_frame("ueditor_0")
-action_chains = ActionChains(driver)
-my_table = driver.find_elements_by_xpath("//tbody//tr")
-for i in range(len(my_table)):
-    cells = my_table[i].find_elements_by_tag_name("td")
-    for j in range(len(cells)):
-        cells[j].click()
+my_table = driver.find_element_by_xpath("//tbody")
+trs = my_table.find_elements_by_tag_name("tr")
+for tr in trs:
+    tds = tr.find_elements_by_tag_name("td")
+    for td in tds:
+        td.click()
         action_chains = ActionChains(driver)
         action_chains.send_keys("test").perform()
 
 driver.switch_to_default_content()
 driver.quit()
+
